@@ -5,11 +5,10 @@
   "private": true,
   "scripts": {
     "dev": "cross-env TINA_PUBLIC_IS_LOCAL=true tinacms dev -c \"next dev\"",
-    "build": "tinacms build && next build",
+    "build": "next build",
     "build:tina": "tinacms build && next build",
     "start": "next start",
-    "lint": "next lint",
-    "export": "next export"
+    "lint": "next lint"
   },
   "keywords": [
     "nextjs",
