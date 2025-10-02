@@ -9,7 +9,6 @@ export default function Home(props: any) {
     query: props.query,
     variables: props.variables,
     data: props.data,
-    liveMode: true,
   })
 
   return (
