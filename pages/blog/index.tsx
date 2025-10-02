@@ -68,7 +68,7 @@ export default function BlogIndex(props: any) {
             </div>
           ) : (
             <div className="grid gap-8 lg:grid-cols-2">
-              {posts.map((post) => (
+              {posts.map((post: any) => (
                 <article key={post.node.id} className="bg-white rounded-lg shadow-md overflow-hidden">
                   {post.node.coverImage && (
                     <div className="aspect-w-16 aspect-h-9">
