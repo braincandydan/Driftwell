@@ -233,16 +233,25 @@ export default function DynamicPage(props: any) {
 }
 
 export const getStaticPaths = async () => {
-  const pagesListData = await client.queries.pageConnection()
-  
-  const paths = pagesListData.data.pageConnection.edges?.map((page) => {
-    if (!page?.node?.slug) return null
-    return { params: { slug: [page.node.slug] } }
-  }).filter(Boolean) || []
+  try {
+    const pagesListData = await client.queries.pageConnection()
+    
+    const paths = pagesListData.data.pageConnection.edges?.map((page) => {
+      if (!page?.node?.slug) return null
+      return { params: { slug: [page.node.slug] } }
+    }).filter(Boolean) || []
 
-  return {
-    paths,
-    fallback: 'blocking',
+    return {
+      paths,
+      fallback: 'blocking',
+    }
+  } catch (error) {
+    // During build, if Tina CMS is not available, return empty paths
+    // Pages will be generated on-demand with fallback: 'blocking'
+    return {
+      paths: [],
+      fallback: 'blocking',
+    }
   }
 }
 
