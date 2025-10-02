@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { useTina } from 'tinacms/dist/react'
 import client from '../../tina/__generated__/client'
 
-export default function BlogIndex(props) {
+export default function BlogIndex(props: any) {
   const { data } = useTina({
     query: props.query,
     variables: props.variables,
