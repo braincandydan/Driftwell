@@ -105,7 +105,7 @@ export default function BlogIndex(props: any) {
                       </Link>
                       {post.node.tags && post.node.tags.length > 0 && (
                         <div className="flex flex-wrap gap-2">
-                          {post.node.tags.map((tag, index) => (
+                          {post.node.tags.map((tag: any, index: number) => (
                             <span
                               key={index}
                               className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
