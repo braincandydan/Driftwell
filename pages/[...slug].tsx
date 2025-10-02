@@ -85,7 +85,7 @@ export default function DynamicPage(props: any) {
         )}
 
         {/* Page Blocks */}
-        {page.blocks?.map((block, index) => {
+        {page.blocks?.map((block: any, index: number) => {
           switch (block.__typename) {
             case 'PageBlocksHero':
               return (
@@ -123,13 +123,13 @@ export default function DynamicPage(props: any) {
                   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <h2 className="text-3xl font-extrabold text-gray-900 text-center mb-12">{block.services?.title}</h2>
                     <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                      {block.services?.services?.map((service, serviceIndex) => (
+                      {block.services?.services?.map((service: any, serviceIndex: number) => (
                         <div key={serviceIndex} className="bg-white p-6 rounded-lg shadow-md">
                           <div className="text-4xl mb-4">{service.icon}</div>
                           <h3 className="text-xl font-semibold text-gray-900 mb-3">{service.title}</h3>
                           <p className="text-gray-600 mb-4">{service.description}</p>
                           <ul className="text-gray-600 space-y-2">
-                            {service.features?.map((feature, featureIndex) => (
+                            {service.features?.map((feature: any, featureIndex: number) => (
                               <li key={featureIndex} className="flex items-start">
                                 <span className="text-green-500 mr-2">•</span>
                                 <span>{feature.feature}</span>
