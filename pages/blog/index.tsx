@@ -137,7 +137,7 @@ export default function BlogIndex(props: any) {
 }
 
 export const getStaticProps = async () => {
-  let postsListData = {
+  let postsListData: any = {
     data: { postConnection: { edges: [] } },
     query: '',
     variables: {},
