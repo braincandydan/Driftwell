@@ -1,1 +1,12 @@
 node_modules
+
+# Environment variables (contains secrets - never commit!)
+.env.local
+.env*.local
+
+# Next.js build output
+.next
+out
+
+# Vercel
+.vercel
