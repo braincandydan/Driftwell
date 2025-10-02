@@ -1,0 +1,57 @@
+fragment PostParts on Post {
+  __typename
+  title
+  excerpt
+  date
+  author
+  coverImage
+  tags
+  body
+}
+
+fragment PageParts on Page {
+  __typename
+  title
+  description
+  slug
+  pageType
+  heroImage
+  heroTitle
+  heroSubtitle
+  servicesTitle
+  service1Title
+  service1Description
+  service2Title
+  service2Description
+  service3Title
+  service3Description
+  aboutTitle
+  aboutContent
+  contactTitle
+  seo {
+    __typename
+    metaTitle
+    metaDescription
+    ogImage
+  }
+}
+
+fragment SiteParts on Site {
+  __typename
+  title
+  description
+  logo
+  url
+  social {
+    __typename
+    twitter
+    github
+    linkedin
+  }
+  contact {
+    __typename
+    phone
+    email
+    address
+  }
+}
