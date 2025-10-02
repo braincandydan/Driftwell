@@ -3,8 +3,8 @@ import Head from 'next/head'
 
 export default function Admin() {
   useEffect(() => {
-    // Redirect to the Tina CMS admin interface
-    window.location.href = '/admin/index.html'
+    // Redirect to the Tina CMS visual editor interface
+    window.location.href = '/admin/index.html#/~/'
   }, [])
 
   return (
