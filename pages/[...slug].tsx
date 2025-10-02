@@ -236,8 +236,9 @@ export const getStaticPaths = async () => {
   const pagesListData = await client.queries.pageConnection()
   
   const paths = pagesListData.data.pageConnection.edges?.map((page) => {
+    if (!page?.node?.slug) return null
     return { params: { slug: [page.node.slug] } }
-  }) || []
+  }).filter(Boolean) || []
 
   return {
     paths,
