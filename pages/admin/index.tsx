@@ -1,4 +1,3 @@
-import { TinaEditProvider } from 'tinacms/dist/react'
 import Head from 'next/head'
 
 export default function Admin() {
