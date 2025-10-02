@@ -3,7 +3,7 @@ import client from '../tina/__generated__/client'
 import Head from 'next/head'
 import Link from 'next/link'
 
-export default function DynamicPage(props) {
+export default function DynamicPage(props: any) {
   const { data } = useTina({
     query: props.query,
     variables: props.variables,
@@ -245,7 +245,7 @@ export const getStaticPaths = async () => {
   }
 }
 
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps = async ({ params }: any) => {
   const slug = params.slug[0]
   
   try {
