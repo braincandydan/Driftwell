@@ -137,7 +137,18 @@ export default function BlogIndex(props: any) {
 }
 
 export const getStaticProps = async () => {
-  const postsListData = await client.queries.postConnection()
+  let postsListData = {
+    data: { postConnection: { edges: [] } },
+    query: '',
+    variables: {},
+  }
+
+  try {
+    postsListData = await client.queries.postConnection()
+  } catch (error) {
+    // During build, if Tina CMS is not available, return empty posts
+    console.log('Tina CMS not available during build, returning empty posts')
+  }
 
   return {
     props: {
