@@ -120,83 +120,6 @@ export default defineConfig({
             required: true,
           },
           {
-            type: 'image',
-            name: 'heroImage',
-            label: 'Hero Image',
-          },
-          {
-            type: 'string',
-            name: 'heroTitle',
-            label: 'Hero Title',
-          },
-          {
-            type: 'string',
-            name: 'heroSubtitle',
-            label: 'Hero Subtitle',
-            ui: {
-              component: 'textarea',
-            },
-          },
-          {
-            type: 'string',
-            name: 'servicesTitle',
-            label: 'Services Section Title',
-          },
-          {
-            type: 'string',
-            name: 'service1Title',
-            label: 'Service 1 Title',
-          },
-          {
-            type: 'string',
-            name: 'service1Description',
-            label: 'Service 1 Description',
-            ui: {
-              component: 'textarea',
-            },
-          },
-          {
-            type: 'string',
-            name: 'service2Title',
-            label: 'Service 2 Title',
-          },
-          {
-            type: 'string',
-            name: 'service2Description',
-            label: 'Service 2 Description',
-            ui: {
-              component: 'textarea',
-            },
-          },
-          {
-            type: 'string',
-            name: 'service3Title',
-            label: 'Service 3 Title',
-          },
-          {
-            type: 'string',
-            name: 'service3Description',
-            label: 'Service 3 Description',
-            ui: {
-              component: 'textarea',
-            },
-          },
-          {
-            type: 'string',
-            name: 'aboutTitle',
-            label: 'About Section Title',
-          },
-          {
-            type: 'rich-text',
-            name: 'aboutContent',
-            label: 'About Section Content',
-          },
-          {
-            type: 'string',
-            name: 'contactTitle',
-            label: 'Contact Section Title',
-          },
-          {
             type: 'object',
             name: 'seo',
             label: 'SEO Settings',
@@ -218,6 +141,206 @@ export default defineConfig({
                 type: 'image',
                 name: 'ogImage',
                 label: 'Social Media Image',
+              },
+            ],
+          },
+          {
+            type: 'object',
+            name: 'blocks',
+            label: 'Page Blocks',
+            list: true,
+            ui: {
+              visualSelector: true,
+            },
+            templates: [
+              {
+                name: 'hero',
+                label: 'Hero Section',
+                fields: [
+                  {
+                    type: 'string',
+                    name: 'title',
+                    label: 'Hero Title',
+                    required: true,
+                  },
+                  {
+                    type: 'string',
+                    name: 'subtitle',
+                    label: 'Hero Subtitle',
+                    ui: {
+                      component: 'textarea',
+                    },
+                  },
+                  {
+                    type: 'image',
+                    name: 'image',
+                    label: 'Hero Image',
+                  },
+                  {
+                    type: 'string',
+                    name: 'ctaText',
+                    label: 'Call to Action Text',
+                  },
+                  {
+                    type: 'string',
+                    name: 'ctaLink',
+                    label: 'Call to Action Link',
+                  },
+                ],
+              },
+              {
+                name: 'textBlock',
+                label: 'Text Block',
+                fields: [
+                  {
+                    type: 'string',
+                    name: 'title',
+                    label: 'Block Title',
+                  },
+                  {
+                    type: 'rich-text',
+                    name: 'content',
+                    label: 'Content',
+                    isBody: true,
+                  },
+                ],
+              },
+              {
+                name: 'services',
+                label: 'Services Section',
+                fields: [
+                  {
+                    type: 'string',
+                    name: 'title',
+                    label: 'Section Title',
+                    required: true,
+                  },
+                  {
+                    type: 'object',
+                    name: 'services',
+                    label: 'Services',
+                    list: true,
+                    fields: [
+                      {
+                        type: 'string',
+                        name: 'title',
+                        label: 'Service Title',
+                        required: true,
+                      },
+                      {
+                        type: 'string',
+                        name: 'description',
+                        label: 'Service Description',
+                        ui: {
+                          component: 'textarea',
+                        },
+                        required: true,
+                      },
+                      {
+                        type: 'string',
+                        name: 'icon',
+                        label: 'Icon (emoji or text)',
+                      },
+                      {
+                        type: 'object',
+                        name: 'features',
+                        label: 'Features',
+                        list: true,
+                        fields: [
+                          {
+                            type: 'string',
+                            name: 'feature',
+                            label: 'Feature',
+                            required: true,
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                name: 'imageWithText',
+                label: 'Image with Text',
+                fields: [
+                  {
+                    type: 'string',
+                    name: 'title',
+                    label: 'Block Title',
+                  },
+                  {
+                    type: 'rich-text',
+                    name: 'content',
+                    label: 'Content',
+                    isBody: true,
+                  },
+                  {
+                    type: 'image',
+                    name: 'image',
+                    label: 'Image',
+                  },
+                  {
+                    type: 'string',
+                    name: 'imagePosition',
+                    label: 'Image Position',
+                    options: [
+                      { label: 'Left', value: 'left' },
+                      { label: 'Right', value: 'right' },
+                    ],
+                  },
+                ],
+              },
+              {
+                name: 'contactForm',
+                label: 'Contact Form',
+                fields: [
+                  {
+                    type: 'string',
+                    name: 'title',
+                    label: 'Form Title',
+                    required: true,
+                  },
+                  {
+                    type: 'string',
+                    name: 'subtitle',
+                    label: 'Form Subtitle',
+                    ui: {
+                      component: 'textarea',
+                    },
+                  },
+                ],
+              },
+              {
+                name: 'cta',
+                label: 'Call to Action',
+                fields: [
+                  {
+                    type: 'string',
+                    name: 'title',
+                    label: 'CTA Title',
+                    required: true,
+                  },
+                  {
+                    type: 'string',
+                    name: 'subtitle',
+                    label: 'CTA Subtitle',
+                    ui: {
+                      component: 'textarea',
+                    },
+                  },
+                  {
+                    type: 'string',
+                    name: 'buttonText',
+                    label: 'Button Text',
+                    required: true,
+                  },
+                  {
+                    type: 'string',
+                    name: 'buttonLink',
+                    label: 'Button Link',
+                    required: true,
+                  },
+                ],
               },
             ],
           },
