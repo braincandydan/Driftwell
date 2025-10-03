@@ -80,13 +80,13 @@ export default function DynamicPage(props: any) {
                       <div className="mb-8">
                         <img
                           src={block.hero.image}
-                          alt={block.hero.title}
+                          alt={block.hero.heroTitle}
                           className="w-full h-64 object-cover rounded-lg mx-auto"
                         />
                       </div>
                     )}
                     <h1 className="text-4xl font-extrabold text-gray-900 mb-4">
-                      {block.hero.title}
+                      {block.hero.heroTitle}
                     </h1>
                     {block.hero.subtitle && (
                       <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
@@ -112,8 +112,8 @@ export default function DynamicPage(props: any) {
               <section key={index} className="py-12">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   <div className="prose prose-lg max-w-none">
-                    {block.textBlock.title && (
-                      <h2 className="text-3xl font-bold text-gray-900 mb-6">{block.textBlock.title}</h2>
+                    {block.textBlock.textTitle && (
+                      <h2 className="text-3xl font-bold text-gray-900 mb-6">{block.textBlock.textTitle}</h2>
                     )}
                     <div className="prose-content">
                       <div dangerouslySetInnerHTML={{ __html: block.textBlock.content || '' }} />
@@ -128,14 +128,14 @@ export default function DynamicPage(props: any) {
             return (
               <section key={index} className="py-16 bg-gray-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                  <h2 className="text-3xl font-extrabold text-gray-900 text-center mb-12">{block.services.title}</h2>
+                  <h2 className="text-3xl font-extrabold text-gray-900 text-center mb-12">{block.services.servicesTitle}</h2>
                   <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                     {block.services.services?.map((service: any, serviceIndex: number) => (
                       <div key={serviceIndex} className="bg-white p-6 rounded-lg shadow-md">
                         {service.icon && (
                           <div className="text-4xl mb-4">{service.icon}</div>
                         )}
-                        <h3 className="text-xl font-semibold text-gray-900 mb-3">{service.title}</h3>
+                        <h3 className="text-xl font-semibold text-gray-900 mb-3">{service.serviceTitle}</h3>
                         <p className="text-gray-600 mb-4">{service.description}</p>
                         {service.features && service.features.length > 0 && (
                           <ul className="text-gray-600 space-y-2">
@@ -161,8 +161,8 @@ export default function DynamicPage(props: any) {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   <div className={`grid gap-8 lg:grid-cols-2 ${block.imageWithText.imagePosition === 'right' ? 'lg:grid-flow-col' : ''}`}>
                     <div className="prose prose-lg">
-                      {block.imageWithText.title && (
-                        <h2 className="text-3xl font-extrabold text-gray-900 mb-6">{block.imageWithText.title}</h2>
+                      {block.imageWithText.imageTitle && (
+                        <h2 className="text-3xl font-extrabold text-gray-900 mb-6">{block.imageWithText.imageTitle}</h2>
                       )}
                       <div className="prose-content">
                         <div dangerouslySetInnerHTML={{ __html: block.imageWithText.content || '' }} />
@@ -172,7 +172,7 @@ export default function DynamicPage(props: any) {
                       <div className="order-first lg:order-last">
                         <img
                           src={block.imageWithText.image}
-                          alt={block.imageWithText.title}
+                          alt={block.imageWithText.imageTitle}
                           className="w-full h-64 object-cover rounded-lg"
                         />
                       </div>
@@ -187,7 +187,7 @@ export default function DynamicPage(props: any) {
             return (
               <section key={index} className="py-16 bg-gray-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                  <h2 className="text-3xl font-extrabold text-gray-900 text-center mb-8">{block.contactForm.title}</h2>
+                  <h2 className="text-3xl font-extrabold text-gray-900 text-center mb-8">{block.contactForm.formTitle}</h2>
                   {block.contactForm.subtitle && (
                     <p className="text-center text-gray-600 mb-8">{block.contactForm.subtitle}</p>
                   )}
@@ -219,7 +219,7 @@ export default function DynamicPage(props: any) {
             return (
               <section key={index} className="py-16 bg-blue-600">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                  <h2 className="text-3xl font-extrabold text-white mb-4">{block.cta.title}</h2>
+                  <h2 className="text-3xl font-extrabold text-white mb-4">{block.cta.ctaTitle}</h2>
                   {block.cta.subtitle && (
                     <p className="text-xl text-blue-100 mb-8">{block.cta.subtitle}</p>
                   )}

@@ -159,7 +159,7 @@ export default defineConfig({
                 fields: [
                   {
                     type: 'string',
-                    name: 'title',
+                    name: 'heroTitle',
                     label: 'Hero Title',
                     required: true,
                   },
@@ -194,7 +194,7 @@ export default defineConfig({
                 fields: [
                   {
                     type: 'string',
-                    name: 'title',
+                    name: 'textTitle',
                     label: 'Block Title',
                   },
                   {
@@ -211,7 +211,7 @@ export default defineConfig({
                 fields: [
                   {
                     type: 'string',
-                    name: 'title',
+                    name: 'servicesTitle',
                     label: 'Section Title',
                     required: true,
                   },
@@ -223,7 +223,7 @@ export default defineConfig({
                     fields: [
                       {
                         type: 'string',
-                        name: 'title',
+                        name: 'serviceTitle',
                         label: 'Service Title',
                         required: true,
                       },
@@ -265,7 +265,7 @@ export default defineConfig({
                 fields: [
                   {
                     type: 'string',
-                    name: 'title',
+                    name: 'imageTitle',
                     label: 'Block Title',
                   },
                   {
@@ -296,7 +296,7 @@ export default defineConfig({
                 fields: [
                   {
                     type: 'string',
-                    name: 'title',
+                    name: 'formTitle',
                     label: 'Form Title',
                     required: true,
                   },
@@ -316,7 +316,7 @@ export default defineConfig({
                 fields: [
                   {
                     type: 'string',
-                    name: 'title',
+                    name: 'ctaTitle',
                     label: 'CTA Title',
                     required: true,
                   },
