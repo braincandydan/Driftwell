@@ -1,0 +1,87 @@
+fragment PostParts on Post {
+  __typename
+  title
+  excerpt
+  date
+  author
+  coverImage
+  tags
+  body
+}
+
+fragment PageParts on Page {
+  __typename
+  title
+  description
+  slug
+  pageType
+  seo {
+    __typename
+    metaTitle
+    metaDescription
+    ogImage
+  }
+  blocks {
+    __typename
+    ... on PageBlocksHero {
+      heroTitle
+      subtitle
+      image
+      ctaText
+      ctaLink
+    }
+    ... on PageBlocksTextBlock {
+      textTitle
+      content
+    }
+    ... on PageBlocksServices {
+      servicesTitle
+      services {
+        __typename
+        serviceTitle
+        description
+        icon
+        features {
+          __typename
+          feature
+        }
+      }
+    }
+    ... on PageBlocksImageWithText {
+      imageTitle
+      content
+      image
+      imagePosition
+    }
+    ... on PageBlocksContactForm {
+      formTitle
+      subtitle
+    }
+    ... on PageBlocksCta {
+      ctaTitle
+      subtitle
+      buttonText
+      buttonLink
+    }
+  }
+}
+
+fragment SiteParts on Site {
+  __typename
+  title
+  description
+  logo
+  url
+  social {
+    __typename
+    twitter
+    github
+    linkedin
+  }
+  contact {
+    __typename
+    phone
+    email
+    address
+  }
+}
