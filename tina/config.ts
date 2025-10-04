@@ -1,11 +1,8 @@
 import { defineConfig } from 'tinacms'
 
 // Your hosting provider likely exposes this as an environment variable
-// Schema refresh trigger - updated to sync with Tina Cloud
+// FORCE SCHEMA REFRESH - Timestamp: 2025-01-04 00:15:00
 const branch = process.env.HEAD || process.env.VERCEL_GIT_COMMIT_REF || 'main'
-
-// Force main branch for admin panel consistency
-const adminBranch = 'main'
 
 export default defineConfig({
   branch: 'main', // Force main branch to avoid branch detection issues

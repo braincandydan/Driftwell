@@ -2,7 +2,8 @@
 import { defineConfig } from "tinacms";
 var branch = process.env.HEAD || process.env.VERCEL_GIT_COMMIT_REF || "main";
 var config_default = defineConfig({
-  branch,
+  branch: "main",
+  // Force main branch to avoid branch detection issues
   clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID || "fallback",
   token: process.env.TINA_TOKEN || "fallback",
   build: {
