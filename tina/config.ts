@@ -23,7 +23,6 @@ export default defineConfig({
     previewUrl: ({ branch }) => {
       return { url: `https://driftwell.vercel.app` }
     },
-    hideSidebar: false,
   },
   schema: {
     collections: [
