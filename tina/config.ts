@@ -4,8 +4,11 @@ import { defineConfig } from 'tinacms'
 // Schema refresh trigger - updated to sync with Tina Cloud
 const branch = process.env.HEAD || process.env.VERCEL_GIT_COMMIT_REF || 'main'
 
+// Force main branch for admin panel consistency
+const adminBranch = 'main'
+
 export default defineConfig({
-  branch,
+  branch: 'main', // Force main branch to avoid branch detection issues
   clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID || 'fallback',
   token: process.env.TINA_TOKEN || 'fallback',
 
@@ -23,6 +26,10 @@ export default defineConfig({
     previewUrl: ({ branch }) => {
       return { url: `http://localhost:3000` }
     },
+  },
+  // Force schema refresh and disable cloud checks for admin panel
+  experimental: {
+    tinaGraphQLVersion: '1.6.1',
   },
   schema: {
     collections: [
