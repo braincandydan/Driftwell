@@ -24,6 +24,11 @@ export default defineConfig({
       return { url: `https://driftwell.vercel.app` }
     },
   },
+  // Enable visual editing
+  cmsCallback: (cms) => {
+    cms.flags.set('visual-editing', true)
+    return cms
+  },
   schema: {
     collections: [
       {

@@ -19,8 +19,12 @@ var config_default = defineConfig({
   ui: {
     previewUrl: ({ branch: branch2 }) => {
       return { url: `https://driftwell.vercel.app` };
-    },
-    hideSidebar: false
+    }
+  },
+  // Enable visual editing
+  cmsCallback: (cms) => {
+    cms.flags.set("visual-editing", true);
+    return cms;
   },
   schema: {
     collections: [
