@@ -24,6 +24,11 @@ export default defineConfig({
       return { url: `http://localhost:3000` }
     },
   },
+  // Enable visual editing
+  cmsCallback: (cms) => {
+    cms.flags.set('visual-editing', true)
+    return cms
+  },
   schema: {
     collections: [
       {
@@ -152,6 +157,9 @@ export default defineConfig({
             list: true,
             ui: {
               visualSelector: true,
+              itemProps: (item) => {
+                return { label: item?.hero?.heroTitle || item?.services?.servicesTitle || item?.textBlock?.textTitle || item?.contactForm?.formTitle || item?.cta?.ctaTitle || 'Block' }
+              },
             },
             templates: [
               {
