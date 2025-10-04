@@ -21,13 +21,9 @@ export default defineConfig({
   },
   ui: {
     previewUrl: ({ branch }) => {
-      return { url: `http://localhost:3000` }
+      return { url: `https://driftwell.vercel.app` }
     },
-  },
-  // Enable visual editing
-  cmsCallback: (cms) => {
-    cms.flags.set('visual-editing', true)
-    return cms
+    hideSidebar: false,
   },
   schema: {
     collections: [

@@ -18,8 +18,9 @@ var config_default = defineConfig({
   },
   ui: {
     previewUrl: ({ branch: branch2 }) => {
-      return { url: `http://localhost:3000` };
-    }
+      return { url: `https://driftwell.vercel.app` };
+    },
+    hideSidebar: false
   },
   schema: {
     collections: [
