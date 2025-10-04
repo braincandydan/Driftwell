@@ -51,138 +51,184 @@ export default function Home(props: any) {
         </header>
 
         <main className="main-content">
-          {/* Hero Section */}
-          <section className="hero" style={{
-            backgroundImage: `linear-gradient(135deg, rgba(23, 23, 23, 0.9) 0%, rgba(42, 42, 42, 0.2) 100%), url(/wp-content/uploads/2025/06/DriftwellPlumbing-scaled.jpg)`
-          }}>
-            <div className="container">
-              <div className="hero-content">
-                <h1>{data.page?.heroTitle || 'Driftwell Plumbing'}</h1>
-                <p>{data.page?.heroSubtitle || 'Smart solutions for your commercial & residential projects.'}</p>
-                
-                <div className="hero-buttons">
-                  <a href="#contact" className="btn btn-primary">Get Smart Quote</a>
-                  <a href="tel:(250) 986 7329" className="btn btn-secondary">Emergency Call</a>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Services Section */}
-          <section className="services" id="services">
-            <div className="container">
-              <h2 className="section-title">{data.page?.servicesTitle || 'Our Advanced Services'}</h2>
-              
-              <div className="services-grid">
-                <div className="service-card">
-                  <div className="service-icon">🔧</div>
-                  <h3>{data.page?.service1Title || 'Emergency Plumbing Services'}</h3>
-                  <p>{data.page?.service1Description || 'Our team is available 24/7 to handle urgent plumbing issues, providing fast and dependable solutions to prevent property damage and restore your peace of mind.'}</p>
-                </div>
-                
-                <div className="service-card">
-                  <div className="service-icon">🔧</div>
-                  <h3>{data.page?.service2Title || 'Leak Repair'}</h3>
-                  <p>{data.page?.service2Description || 'We use advanced technology to repair leaks in pipes, fixtures, and walls. Our services help prevent costly water damage and keep your plumbing system running efficiently.'}</p>
-                </div>
-                
-                <div className="service-card">
-                  <div className="service-icon">🔧</div>
-                  <h3>{data.page?.service3Title || 'Water Heater Services'}</h3>
-                  <p>{data.page?.service3Description || 'Our experts install, repair, and maintain all types of water heaters, including tankless and traditional models. We ensure you have reliable hot water and address issues like inconsistent temperatures or system failures.'}</p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* About Section */}
-          <section className="about" id="about">
-            <div className="container">
-              <div className="about-content">
-                <div className="about-text">
-                  <h2>{data.page?.aboutTitle || 'Serving Kelowna & the Okanagan'}</h2>
-                  <div className="prose-content">
-                    {data.page?.aboutContent ? (
-                      <TinaMarkdown content={data.page.aboutContent} />
-                    ) : (
-                      <div dangerouslySetInnerHTML={{ __html: '<p>Driftwell Contracting is your licensed and insured plumbing company serving Kelowna and the Okanagan region. We deliver high-quality plumbing solutions for residential and commercial clients, offering fair pricing and honest service on every job.</p><p>Our experienced team handles everything from emergency repairs and leak detection to full bathroom and kitchen renovations, water heater services, and more. Contact us today for professional plumbing services you can trust in Kelowna and the Okanagan.</p>' }} />
+          {/* Render Page Blocks Dynamically */}
+          {data.page?.blocks?.map((block: any, index: number) => {
+            // Hero Block
+            if (block.hero) {
+              return (
+                <section key={index} className="hero" style={{
+                  backgroundImage: `linear-gradient(135deg, rgba(23, 23, 23, 0.9) 0%, rgba(42, 42, 42, 0.2) 100%), url(/wp-content/uploads/2025/06/DriftwellPlumbing-scaled.jpg)`
+                }}>
+                  <div className="container">
+                    <div className="hero-content">
+                      <h1>{block.hero.heroTitle}</h1>
+                      <p>{block.hero.subtitle}</p>
+                      
+                      <div className="hero-buttons">
+                        {block.hero.ctaText && block.hero.ctaLink && (
+                          <a href={block.hero.ctaLink} className="btn btn-primary">{block.hero.ctaText}</a>
+                        )}
+                        <a href="tel:(250) 986 7329" className="btn btn-secondary">Emergency Call</a>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              )
+            }
+            
+            // Services Block
+            if (block.services) {
+              return (
+                <section key={index} className="services" id="services">
+                  <div className="container">
+                    <h2 className="section-title">{block.services.servicesTitle}</h2>
+                    
+                    <div className="services-grid">
+                      {block.services.services?.map((service: any, serviceIndex: number) => (
+                        <div key={serviceIndex} className="service-card">
+                          <div className="service-icon">{service.icon}</div>
+                          <h3>{service.serviceTitle}</h3>
+                          <p>{service.description}</p>
+                          {service.features && service.features.length > 0 && (
+                            <ul className="service-sub-list">
+                              {service.features.map((feature: any, featureIndex: number) => (
+                                <li key={featureIndex}>{feature.feature}</li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </section>
+              )
+            }
+            
+            // Text Block
+            if (block.textBlock) {
+              return (
+                <section key={index} className="about" id="about">
+                  <div className="container">
+                    <div className="about-content">
+                      <div className="about-text">
+                        <h2>{block.textBlock.textTitle}</h2>
+                        <div className="prose-content">
+                          <div dangerouslySetInnerHTML={{ __html: block.textBlock.content }} />
+                        </div>
+                      </div>
+                      <div className="about-image">
+                        <img src="/wp-content/uploads/2025/06/AboutDriftwell.jpg" alt="Serving Kelowna & the Okanagan" />
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              )
+            }
+            
+            // Contact Form Block
+            if (block.contactForm) {
+              return (
+                <section key={index} className="contact" id="contact">
+                  <div className="container">
+                    <h2 className="section-title">{block.contactForm.formTitle}</h2>
+                    {block.contactForm.subtitle && (
+                      <p style={{ textAlign: 'center', marginBottom: '2rem', color: '#ccc' }}>{block.contactForm.subtitle}</p>
+                    )}
+                    <div className="contact-content">
+                      <div className="contact-info">
+                        <h3>Get In Touch</h3>
+                        <div className="contact-item">
+                          <i>📞</i>
+                          <span>(250) 986 7329</span>
+                        </div>
+                        <div className="contact-item">
+                          <i>✉️</i>
+                          <span>info@driftwellcontracting.com</span>
+                        </div>
+                        <div className="contact-item">
+                          <i>📍</i>
+                          <span>Kelowna, BC</span>
+                        </div>
+                        <div className="contact-item">
+                          <i>🕒</i>
+                          <span>Mon-Fri: 7AM-6PM | Emergency: 24/7</span>
+                        </div>
+                      </div>
+                      <div className="contact-form">
+                        <h3>Request Smart Quote</h3>
+                        <form method="post" action="https://formsubmit.co/info@driftwellcontracting.com">
+                          <input type="hidden" name="_subject" value="New Quote Request - DRIFTWELL CONTRACTING" />
+                          <input type="hidden" name="_captcha" value="false" />
+                          <input type="hidden" name="_template" value="box" />
+                          
+                          <div className="form-group">
+                            <label htmlFor="name">Name</label>
+                            <input type="text" id="name" name="name" required placeholder="Your Name" />
+                          </div>
+                          <div className="form-group">
+                            <label htmlFor="email">Email</label>
+                            <input type="email" id="email" name="email" required placeholder="your@email.com" />
+                          </div>
+                          <div className="form-group">
+                            <label htmlFor="phone">Phone</label>
+                            <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" />
+                          </div>
+                          <div className="form-group">
+                            <label htmlFor="service">Service Needed</label>
+                            <select id="service" name="service">
+                              <option value="">Select a service</option>
+                              <option value="Emergency Plumbing Services">Emergency Plumbing Services</option>
+                              <option value="Leak Repair">Leak Repair</option>
+                              <option value="Water Heater Services">Water Heater Services</option>
+                              <option value="Toilet, Faucet & Fixture Services">Toilet, Faucet & Fixture Services</option>
+                              <option value="Full Bathroom & Kitchen Renovations">Full Bathroom & Kitchen Renovations</option>
+                              <option value="Commercial & Residential Plumbing">Commercial & Residential Plumbing</option>
+                              <option value="emergency">Custom Service</option>
+                            </select>
+                          </div>
+                          <div className="form-group">
+                            <label htmlFor="message">Message</label>
+                            <textarea id="message" name="message" placeholder="Describe your plumbing needs..."></textarea>
+                          </div>
+                          
+                          <button type="submit" className="form-submit">Send Request</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              )
+            }
+            
+            // CTA Block
+            if (block.cta) {
+              return (
+                <section key={index} className="cta-section" style={{ padding: '3rem 0', background: 'linear-gradient(135deg, #29d1d1, #1fa1a1)', color: 'white', textAlign: 'center' }}>
+                  <div className="container">
+                    <h2 style={{ fontSize: '2rem', marginBottom: '1rem' }}>{block.cta.ctaTitle}</h2>
+                    {block.cta.subtitle && (
+                      <p style={{ fontSize: '1.1rem', marginBottom: '2rem', opacity: 0.9 }}>{block.cta.subtitle}</p>
+                    )}
+                    {block.cta.buttonText && block.cta.buttonLink && (
+                      <a href={block.cta.buttonLink} style={{ 
+                        display: 'inline-block', 
+                        padding: '1rem 2rem', 
+                        background: 'white', 
+                        color: '#29d1d1', 
+                        textDecoration: 'none', 
+                        borderRadius: '8px', 
+                        fontWeight: '600' 
+                      }}>
+                        {block.cta.buttonText}
+                      </a>
                     )}
                   </div>
-                </div>
-                <div className="about-image">
-                  <img src="/wp-content/uploads/2025/06/AboutDriftwell.jpg" alt="Serving Kelowna & the Okanagan" />
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Contact Section */}
-          <section className="contact" id="contact">
-            <div className="container">
-              <h2 className="section-title">{data.page?.contactTitle || 'Connect With Us'}</h2>
-              <div className="contact-content">
-                <div className="contact-info">
-                  <h3>Get In Touch</h3>
-                  <div className="contact-item">
-                    <i>📞</i>
-                    <span>(250) 986 7329</span>
-                  </div>
-                  <div className="contact-item">
-                    <i>✉️</i>
-                    <span>info@driftwellcontracting.com</span>
-                  </div>
-                  <div className="contact-item">
-                    <i>📍</i>
-                    <span>Kelowna, BC</span>
-                  </div>
-                  <div className="contact-item">
-                    <i>🕒</i>
-                    <span>Mon-Fri: 7AM-6PM | Emergency: 24/7</span>
-                  </div>
-                </div>
-                <div className="contact-form">
-                  <h3>Request Smart Quote</h3>
-                  <form method="post" action="https://formsubmit.co/info@driftwellcontracting.com">
-                    <input type="hidden" name="_subject" value="New Quote Request - DRIFTWELL CONTRACTING" />
-                    <input type="hidden" name="_captcha" value="false" />
-                    <input type="hidden" name="_template" value="box" />
-                    
-                    <div className="form-group">
-                      <label htmlFor="name">Name</label>
-                      <input type="text" id="name" name="name" required placeholder="Your Name" />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="email">Email</label>
-                      <input type="email" id="email" name="email" required placeholder="your@email.com" />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="phone">Phone</label>
-                      <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="service">Service Needed</label>
-                      <select id="service" name="service">
-                        <option value="">Select a service</option>
-                        <option value="Emergency Plumbing Services">Emergency Plumbing Services</option>
-                        <option value="Leak Repair">Leak Repair</option>
-                        <option value="Water Heater Services">Water Heater Services</option>
-                        <option value="Toilet, Faucet & Fixture Services">Toilet, Faucet & Fixture Services</option>
-                        <option value="Full Bathroom & Kitchen Renovations">Full Bathroom & Kitchen Renovations</option>
-                        <option value="Commercial & Residential Plumbing">Commercial & Residential Plumbing</option>
-                        <option value="emergency">Custom Service</option>
-                      </select>
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="message">Message</label>
-                      <textarea id="message" name="message" placeholder="Describe your plumbing needs..."></textarea>
-                    </div>
-                    
-                    <button type="submit" className="form-submit">Send Request</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </section>
+                </section>
+              )
+            }
+            
+            return null
+          })}
         </main>
 
         {/* Footer */}
