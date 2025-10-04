@@ -157,9 +157,6 @@ export default defineConfig({
             list: true,
             ui: {
               visualSelector: true,
-              itemProps: (item) => {
-                return { label: item?.hero?.heroTitle || item?.services?.servicesTitle || item?.textBlock?.textTitle || item?.contactForm?.formTitle || item?.cta?.ctaTitle || 'Block' }
-              },
             },
             templates: [
               {
