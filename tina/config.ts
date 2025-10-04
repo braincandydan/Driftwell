@@ -1,11 +1,10 @@
 import { defineConfig } from 'tinacms'
 
 // Your hosting provider likely exposes this as an environment variable
-// FORCE SCHEMA REFRESH - Timestamp: 2025-01-04 00:15:00
 const branch = process.env.HEAD || process.env.VERCEL_GIT_COMMIT_REF || 'main'
 
 export default defineConfig({
-  branch: 'main', // Force main branch to avoid branch detection issues
+  branch,
   clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID || 'fallback',
   token: process.env.TINA_TOKEN || 'fallback',
 
@@ -24,67 +23,8 @@ export default defineConfig({
       return { url: `https://driftwell.vercel.app` }
     },
   },
-  // Enable visual editing
-  cmsCallback: (cms) => {
-    cms.flags.set('visual-editing', true)
-    return cms
-  },
   schema: {
     collections: [
-      {
-        name: 'post',
-        label: 'Posts',
-        path: 'content/posts',
-        fields: [
-          {
-            type: 'string',
-            name: 'title',
-            label: 'Title',
-            isTitle: true,
-            required: true,
-          },
-          {
-            type: 'string',
-            name: 'excerpt',
-            label: 'Excerpt',
-            ui: {
-              component: 'textarea',
-            },
-          },
-          {
-            type: 'datetime',
-            name: 'date',
-            label: 'Date',
-            required: true,
-          },
-          {
-            type: 'string',
-            name: 'author',
-            label: 'Author',
-            required: true,
-          },
-          {
-            type: 'image',
-            name: 'coverImage',
-            label: 'Cover Image',
-          },
-          {
-            type: 'string',
-            name: 'tags',
-            label: 'Tags',
-            list: true,
-            ui: {
-              component: 'tags',
-            },
-          },
-          {
-            type: 'rich-text',
-            name: 'body',
-            label: 'Body',
-            isBody: true,
-          },
-        ],
-      },
       {
         name: 'page',
         label: 'Pages',
@@ -113,19 +53,6 @@ export default defineConfig({
             required: true,
           },
           {
-            type: 'string',
-            name: 'pageType',
-            label: 'Page Type',
-            options: [
-              { label: 'Homepage', value: 'homepage' },
-              { label: 'Standard Page', value: 'standard' },
-              { label: 'Services Page', value: 'services' },
-              { label: 'About Page', value: 'about' },
-              { label: 'Contact Page', value: 'contact' },
-            ],
-            required: true,
-          },
-          {
             type: 'object',
             name: 'seo',
             label: 'SEO Settings',
@@ -142,11 +69,6 @@ export default defineConfig({
                 ui: {
                   component: 'textarea',
                 },
-              },
-              {
-                type: 'image',
-                name: 'ogImage',
-                label: 'Social Media Image',
               },
             ],
           },
@@ -191,23 +113,6 @@ export default defineConfig({
                     type: 'string',
                     name: 'ctaLink',
                     label: 'Call to Action Link',
-                  },
-                ],
-              },
-              {
-                name: 'textBlock',
-                label: 'Text Block',
-                fields: [
-                  {
-                    type: 'string',
-                    name: 'textTitle',
-                    label: 'Block Title',
-                  },
-                  {
-                    type: 'rich-text',
-                    name: 'content',
-                    label: 'Content',
-                    isBody: true,
                   },
                 ],
               },
@@ -266,12 +171,12 @@ export default defineConfig({
                 ],
               },
               {
-                name: 'imageWithText',
-                label: 'Image with Text',
+                name: 'textBlock',
+                label: 'Text Block',
                 fields: [
                   {
                     type: 'string',
-                    name: 'imageTitle',
+                    name: 'textTitle',
                     label: 'Block Title',
                   },
                   {
@@ -279,20 +184,6 @@ export default defineConfig({
                     name: 'content',
                     label: 'Content',
                     isBody: true,
-                  },
-                  {
-                    type: 'image',
-                    name: 'image',
-                    label: 'Image',
-                  },
-                  {
-                    type: 'string',
-                    name: 'imagePosition',
-                    label: 'Image Position',
-                    options: [
-                      { label: 'Left', value: 'left' },
-                      { label: 'Right', value: 'right' },
-                    ],
                   },
                 ],
               },
@@ -353,6 +244,60 @@ export default defineConfig({
         ],
       },
       {
+        name: 'post',
+        label: 'Posts',
+        path: 'content/posts',
+        fields: [
+          {
+            type: 'string',
+            name: 'title',
+            label: 'Title',
+            isTitle: true,
+            required: true,
+          },
+          {
+            type: 'string',
+            name: 'excerpt',
+            label: 'Excerpt',
+            ui: {
+              component: 'textarea',
+            },
+          },
+          {
+            type: 'datetime',
+            name: 'date',
+            label: 'Date',
+            required: true,
+          },
+          {
+            type: 'string',
+            name: 'author',
+            label: 'Author',
+            required: true,
+          },
+          {
+            type: 'image',
+            name: 'coverImage',
+            label: 'Cover Image',
+          },
+          {
+            type: 'string',
+            name: 'tags',
+            label: 'Tags',
+            list: true,
+            ui: {
+              component: 'tags',
+            },
+          },
+          {
+            type: 'rich-text',
+            name: 'body',
+            label: 'Body',
+            isBody: true,
+          },
+        ],
+      },
+      {
         name: 'site',
         label: 'Site Settings',
         path: 'content/site',
@@ -380,28 +325,6 @@ export default defineConfig({
             type: 'string',
             name: 'url',
             label: 'Site URL',
-          },
-          {
-            type: 'object',
-            name: 'social',
-            label: 'Social Media',
-            fields: [
-              {
-                type: 'string',
-                name: 'twitter',
-                label: 'Twitter URL',
-              },
-              {
-                type: 'string',
-                name: 'github',
-                label: 'GitHub URL',
-              },
-              {
-                type: 'string',
-                name: 'linkedin',
-                label: 'LinkedIn URL',
-              },
-            ],
           },
           {
             type: 'object',
