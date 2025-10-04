@@ -27,10 +27,6 @@ export default defineConfig({
       return { url: `http://localhost:3000` }
     },
   },
-  // Force schema refresh and disable cloud checks for admin panel
-  experimental: {
-    tinaGraphQLVersion: '1.6.1',
-  },
   schema: {
     collections: [
       {
